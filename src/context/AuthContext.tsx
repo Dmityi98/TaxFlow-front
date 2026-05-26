@@ -17,13 +17,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<LoginUserDto | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+   useEffect(() => {
     const initAuth = () => {
       const accessToken = localStorage.getItem('accessToken');
       const refreshToken = localStorage.getItem('refreshToken');
       const userData = localStorage.getItem('user');
 
-      if (accessToken && userData) {
+      // Добавили refreshToken в проверку
+      if (accessToken && refreshToken && userData) {
         setUser(JSON.parse(userData));
       }
       setIsLoading(false);
