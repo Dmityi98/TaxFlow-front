@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.header-logo{
+    max-width: 50px;
+    max-height: 50px;
+}
+
+/* Новый блок для правой части */
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Прижимает весь блок (меню + профиль) вправо */
+    gap: 100px; /* ТОЧНОЕ расстояние между меню и профилем */
+}
+
+.header-list {
+    display: flex;
+    flex-direction: row;
+    gap: 15px; 
+    padding: 0; 
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.header-profile {
+    margin-right: 50px;
+}

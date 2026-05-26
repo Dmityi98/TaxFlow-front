@@ -1,0 +1,168 @@
+.tax-table-container {
+  padding: 24px;
+  background: #f9fafb;
+  min-height: 100%;
+}
+
+.tax-table-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 32px 0;
+  text-align: center;
+}
+
+.quarter-section {
+  margin-bottom: 32px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.quarter-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #374151;
+  padding: 16px 24px;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.tax-table-wrapper {
+  overflow-x: auto;
+}
+
+.tax-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tax-table th {
+  background: #f3f4f6;
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.tax-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;
+}
+
+.tax-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.month-cell {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.table-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.table-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.tax-calculated {
+  color: #667eea;
+  font-weight: 500;
+  background: #f5f3ff;
+}
+
+.balance-cell {
+  font-weight: 600;
+}
+
+.balance-cell.positive {
+  color: #059669;
+}
+
+.balance-cell.negative {
+  color: #dc3545;
+}
+
+.quarter-total {
+  background: #f9fafb;
+}
+
+.quarter-total td {
+  border-top: 2px solid #d1d5db;
+  border-bottom: none;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.year-summary {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+}
+
+.year-summary h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 20px 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-radius: 8px;
+}
+
+.summary-label {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .tax-table-container {
+    padding: 12px;
+  }
+  
+  .tax-table th,
+  .tax-table td {
+    padding: 8px 10px;
+  }
+  
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
