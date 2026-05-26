@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5026/';
+const API_BASE_URL = import.meta.env.VITE_API_URL ||"http://213.171.27.32:5026/api";
 
-class ApiClient {
+class ApiClient { 
   private client: AxiosInstance;
 
   constructor() {
