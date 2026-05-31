@@ -1,13 +1,125 @@
+.slider-section {
+  background: #f9fafb;
+  padding: 0 20px;
+}
+
 .slider-container {
-  width: 800px; /* Ширина слайдера */
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Чтобы картинки не вылезали за пределы слайда */
+.slide {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
 .slide img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
+}
+
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(31, 41, 55, 0.85) 0%,
+    rgba(31, 41, 55, 0.4) 60%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.slide-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  max-width: 500px;
+}
+
+.slide-subtitle {
+  font-size: 16px;
+  color: #e5e7eb;
+  margin-bottom: 24px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.slide-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
   border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: fit-content;
+}
+
+.slide-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #667eea;
+  width: 28px;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .slider-section {
+    padding: 0;
+  }
+
+  .slide {
+    height: 280px;
+    border-radius: 0;
+  }
+
+  .slide-overlay {
+    padding: 24px;
+    background: linear-gradient(
+      to top,
+      rgba(31, 41, 55, 0.85) 0%,
+      rgba(31, 41, 55, 0.4) 60%,
+      transparent 100%
+    );
+    justify-content: flex-end;
+  }
+
+  .slide-title {
+    font-size: 24px;
+    max-width: 100%;
+  }
+
+  .slide-subtitle {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .slide-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }

@@ -27,10 +27,10 @@ const TaxTableView: React.FC<TaxTableViewProps> = ({ yearData, onCellChange, edi
       const value = field === 'turnover' ? col.turnover : 
                     field === 'tax' ? calculateTax(col.turnover) :
                     field === 'taxPayable' ? col.taxPayable : 
-                    col.paidTax;
+                    field === 'paidTax' ? col.paidTax : 0;
       return sum + (value || 0);
     }, 0);
-  };
+  };  
 
   const handleCellChange = (
     quarterIndex: number,
@@ -68,7 +68,7 @@ const TaxTableView: React.FC<TaxTableViewProps> = ({ yearData, onCellChange, edi
               <tbody>
                 {quarter.columns.map((column, mIndex) => {
                   const tax = calculateTax(column.turnover);
-                  const balance = (column.paidTax || 0) - (column.taxPayable || 0);
+
                   
                   return (
                     <tr key={column.id}>
@@ -112,15 +112,26 @@ const TaxTableView: React.FC<TaxTableViewProps> = ({ yearData, onCellChange, edi
                             value={column.paidTax ?? ''}
                             onChange={(e) => handleCellChange(qIndex, mIndex, 'paidTax', e.target.value)}
                             placeholder="0.00"
-                            step="0.01"
+                            step="1"
                           />
                         ) : (
                           <span>{column.paidTax?.toFixed(2) || '-'}</span>
                         )}
                       </td>
-                      <td className={`balance-cell ${balance < 0 ? 'negative' : balance > 0 ? 'positive' : ''}`}>
-                        {balance.toFixed(2)}
-                      </td>
+                       <td>
+                      {editable ? (
+                        <input
+                          type="number"
+                          className="table-input"
+                          value={column.paidTax ?? ''}
+                          onChange={(e) => handleCellChange(qIndex, mIndex, 'paidTax', e.target.value)}
+                          placeholder="0.00"
+                          step="0.01" // Обязательно 0.01 для копеек!
+                        />
+                      ) : (
+                        <span>{column.paidTax?.toFixed(2) || '-'}</span>
+                      )}
+                    </td>
                     </tr>
                   );
                 })}
@@ -148,25 +159,25 @@ const TaxTableView: React.FC<TaxTableViewProps> = ({ yearData, onCellChange, edi
           <div className="summary-item">
             <span className="summary-label">Total Turnover:</span>
             <span className="summary-value">
-              ${yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'turnover'), 0).toFixed(2)}
+              {yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'turnover'), 0).toFixed(2)} руб.
             </span>
           </div>
           <div className="summary-item">
             <span className="summary-label">Total Tax:</span>
             <span className="summary-value">
-              ${yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'tax'), 0).toFixed(2)}
+              {yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'tax'), 0).toFixed(2)} руб.
             </span>
           </div>
           <div className="summary-item">
             <span className="summary-label">Total Tax Payable:</span>
             <span className="summary-value">
-              ${yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'taxPayable'), 0).toFixed(2)}
+              {yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'taxPayable'), 0).toFixed(2)} руб.
             </span>
           </div>
           <div className="summary-item">
             <span className="summary-label">Total Paid:</span>
             <span className="summary-value">
-              ${yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'paidTax'), 0).toFixed(2)}
+              {yearData.quarters.reduce((sum, q) => sum + calculateQuarterTotal(yearData.quarters.indexOf(q), 'paidTax'), 0).toFixed(2)} руб.
             </span>
           </div>
         </div>

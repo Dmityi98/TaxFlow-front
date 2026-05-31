@@ -1,44 +1,58 @@
-
-// Импортируем компоненты Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Импортируем нужные модули (навигация, пагинация)
-import { Navigation, Pagination } from 'swiper/modules';
-// Импортируем стили Swiper
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import './Slider.css';
 
-import './Slider.css'; // Ваши кастомные стили
+const slides = [
+  {
+    id: 1,
+    image: "src/image/slider/1 img.png",
+    title: "Управляйте налогами с лёгкостью",
+    subtitle: "Автоматизация налоговой отчётности для вашего бизнеса",
+  },
+  {
+    id: 2,
+    image: "src/image/slider/2 img.png",
+    title: "Контролируйте финансы",
+    subtitle: "Полный спектр инструментов для финансового учёта",
+  },
+  {
+    id: 3,
+    image: "src/image/slider/3 img.png",
+    title: "Будьте на шаг впереди",
+    subtitle: "Актуальные данные и аналитика в реальном времени",
+  },
+];
 
 const Slider = () => {
   return (
-    <div className="slider-container">
-      <Swiper
-        modules={[Navigation, Pagination]} // Подключаем модули
-        spaceBetween={50} // Отступ между слайдами
-        slidesPerView={1} // Количество видимых слайдов
-        navigation={true} // Включаем стрелки вперед/назад
-        pagination={{ clickable: true }} // Включаем точки (кликабельные)
-        loop={true} // Зацикливание слайдов
-      >
-        <SwiperSlide>
-          {/* TODO Сделать фотографии интерфейса */}
-          <div className="slide">
-            <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="slide">
-            <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Slide 2" />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="slide">
-            <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3" />
-          </div>
-        </SwiperSlide>
-      </Swiper>
-    </div>
+    <section className="slider-section">
+      <div className="slider-container">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={0}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          loop={true}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+        >
+          {slides.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <div className="slide">
+                <img src={slide.image} alt={slide.title} />
+                <div className="slide-overlay">
+                  <h2 className="slide-title">{slide.title}</h2>
+                  <p className="slide-subtitle">{slide.subtitle}</p>
+                  <button className="slide-btn">Узнать больше →</button>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </section>
   );
 };
 

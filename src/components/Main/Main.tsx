@@ -1,20 +1,19 @@
-import { Link } from "react-router-dom";
 import Header from "./Header";
 import Slider from "./Slider";
+import Articles from "./Articles";
+import Reviews from "./Reviews";
+import Footer from "./Footer";
 
 const Main = () => {
-
-    return(
-        <>
-            <Header />
-            <Slider />
-            <Link 
-                to="/login" 
-                className="auth-link">
-                    Войти в личный кабинет
-            </Link>
-        </>
-    )
-}
+  return (
+    <>
+      <Header />
+      <Slider />
+      <Articles />
+      <Reviews />
+      <Footer />
+    </>
+  );
+};
 
 export default Main;
