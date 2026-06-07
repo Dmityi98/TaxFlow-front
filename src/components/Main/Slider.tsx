@@ -8,19 +8,19 @@ import './Slider.css';
 const slides = [
   {
     id: 1,
-    image: "src/image/slider/1 img.png",
+    image: "/image/slider/1 img.png",
     title: "Управляйте налогами с лёгкостью",
     subtitle: "Автоматизация налоговой отчётности для вашего бизнеса",
   },
   {
     id: 2,
-    image: "src/image/slider/2 img.png",
+    image: "/image/slider/2 img.png",
     title: "Контролируйте финансы",
     subtitle: "Полный спектр инструментов для финансового учёта",
   },
   {
     id: 3,
-    image: "src/image/slider/3 img.png",
+    image: "/image/slider/3 img.png",
     title: "Будьте на шаг впереди",
     subtitle: "Актуальные данные и аналитика в реальном времени",
   },

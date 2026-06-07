@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Dashboard from './pages/Dashboard';
+import Subscriptions from './pages/Subscriptions';
 import './styles/global.css';
 import Main from './components/Main/Main';
 
@@ -23,6 +24,14 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/subscriptions"
+            element={
+              <ProtectedRoute>
+                <Subscriptions />
               </ProtectedRoute>
             }
           />

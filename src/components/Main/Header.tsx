@@ -7,7 +7,7 @@ const Header = () => {
       <div className="header-container">
         <div className="header-left">
           <div className="header-logo">
-            <img src="src/image/17796337654083.png" alt="" />
+            <img src="/image/17796337654083.png" alt="" />
           </div>
           <div className="header-brand-text">Решение для бизнеса</div>
         </div>

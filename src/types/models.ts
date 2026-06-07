@@ -54,3 +54,26 @@ export interface User {
   isRefreshTokenExpired?: boolean;
   hasValidRefreshToken?: boolean;
 }
+
+export interface SubscriptionPlan {
+  id: string;
+  name: string;
+  price: number;
+  period: 'month' | 'year';
+  features: string[];
+  highlighted?: boolean;
+}
+
+export interface PaymentInfo {
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+  cardholderName: string;
+}
+
+export interface Subscription {
+  planId: string;
+  status: 'active' | 'expired' | 'cancelled';
+  startDate: Date;
+  endDate: Date;
+}
