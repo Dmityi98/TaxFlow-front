@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Articles.css"
 
 const articles = [
@@ -31,14 +32,19 @@ const Articles = () => {
         </p>
         <div className="articles-grid">
           {articles.map((article) => (
-            <div key={article.id} className="article-card">
+            <Link
+              key={article.id}
+              to={`/articles/${article.id}`}
+              className="article-card"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <div className={`article-image-wrapper article-image-${article.id}`}></div>
               <div className="article-content">
                 <h3 className="article-card-title">{article.title}</h3>
                 <p className="article-description">{article.description}</p>
-                <button className="article-btn">Читать далее →</button>
+                <span className="article-btn">Читать далее →</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

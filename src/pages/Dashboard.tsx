@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { UserProfile } from '../types';
 import { TaxTableList } from '../components/TaxTable';
+import { SubscriptionList } from '../components/Subscriptions';
 import Profile from '../components/Profile/Profile';
 import { Drawer } from '../components/common';
 import './Dashboard.css';
@@ -10,6 +11,7 @@ import './Dashboard.css';
 const Dashboard: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState<'tables' | 'subscriptions'>('tables');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [userProfile, setUserProfile] = useState<UserProfile>({
     id: '',
@@ -38,6 +40,18 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="nav-user">
           <span className="user-name">{user?.userName || 'User'}</span>
+          <button
+            className={`nav-section-btn ${activeSection === 'tables' ? 'active' : ''}`}
+            onClick={() => setActiveSection('tables')}
+          >
+            📊 Таблицы
+          </button>
+          <button
+            className={`nav-section-btn ${activeSection === 'subscriptions' ? 'active' : ''}`}
+            onClick={() => setActiveSection('subscriptions')}
+          >
+            💳 Подписка
+          </button>
           <button className="profile-btn" onClick={() => setIsProfileOpen(true)}>
             👤 Профиль
           </button>
@@ -48,7 +62,7 @@ const Dashboard: React.FC = () => {
       </nav>
 
       <main className="dashboard-main">
-        <TaxTableList />
+        {activeSection === 'tables' ? <TaxTableList /> : <SubscriptionList />}
       </main>
 
       <Drawer

@@ -9,6 +9,16 @@ export interface MonthColumnDto {
   paidTax?: number | null;
 }
 
+export interface PaymentLinkItem {
+  redirectUrl:string,
+  paymentId: string
+}
+export interface PaymetDTO {
+  value: null | PaymentLinkItem;
+  isSuccess: boolean;
+  error: string | null;
+}
+
 export interface QuarterDTO {
   id: string;
   columns: MonthColumnDto[];
@@ -69,4 +79,14 @@ export interface UpdateTableCommand {
   yearId: string;
   nameTable: string;
   yearDto: YearDTO;
+}
+
+
+export interface PaymentCommand{
+  userId: string,
+  amount: number,
+  subscriptionPlan:string
+  description: string,
+  returnUrl: string,
+  month:number
 }

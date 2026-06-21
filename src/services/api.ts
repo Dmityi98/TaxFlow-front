@@ -31,9 +31,11 @@ class ApiClient {
         // Проверяем, что ответ соответствует нашему новому формату { isSuccess, data, error }
         if (response.data && typeof response.data.isSuccess === 'boolean') {
           if (response.data.isSuccess) {
-            // Подменяем response.data на внутренний объект data
-            // Теперь во всех сервисах response.data будет сразу содержать токены/данные
-            response.data = response.data.data;
+            // Подменяем response.data на внутренний объект data (если он есть)
+            // PaymetDTO тоже содержит isSuccess, но у него нет поля data — не ломаем его
+            if (response.data.data !== undefined) {
+              response.data = response.data.data;
+            }
           } else {
             // Если бэкенд вернул 200 OK, но isSuccess: false (бизнес-ошибка)
             // Превращаем это в ошибку, чтобы в компонентах срабатывал catch
@@ -56,7 +58,7 @@ class ApiClient {
               throw new Error('No refresh token');
             }
 
-            const response = await axios.post(`${API_BASE_URL}/user/refresh-token`, {
+            const response = await axios.post(`${API_BASE_URL}/Auth/refresh-token`, {
               refreshToken,
             });
 

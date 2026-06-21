@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import PaymentModal from '../components/Subscription/PaymentModal';
 import { Button } from '../components/common';
 import { SubscriptionPlan } from '../types';
+import { PaymensService } from '../services/subscriprionService';
 import './Subscriptions.css';
 
+
+// Переделать планы подписки
 const plans: SubscriptionPlan[] = [
   {
     id: 'free',
-    name: 'Базовый',
+    name: 'FREE',
     price: 0,
     period: 'month',
     features: [
@@ -21,7 +23,7 @@ const plans: SubscriptionPlan[] = [
   },
   {
     id: 'pro',
-    name: 'Про',
+    name: 'BASIC',
     price: 499,
     period: 'month',
     highlighted: true,
@@ -35,7 +37,7 @@ const plans: SubscriptionPlan[] = [
   },
   {
     id: 'enterprise',
-    name: 'Бизнес',
+    name: 'ENTERPRISE',
     price: 999,
     period: 'month',
     features: [
@@ -52,7 +54,6 @@ const plans: SubscriptionPlan[] = [
 const Subscriptions: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleLogout = () => {
@@ -60,21 +61,29 @@ const Subscriptions: React.FC = () => {
     navigate('/login');
   };
 
-  const handleSelectPlan = (plan: SubscriptionPlan) => {
+  const handleSelectPlan = async (plan: SubscriptionPlan) => {
     if (plan.price === 0) {
       setSuccessMessage(`Подписка «${plan.name}» успешно активирована!`);
       setTimeout(() => setSuccessMessage(null), 3000);
       return;
     }
-    setSelectedPlan(plan);
+
+    try {
+      const data = await PaymensService.subscription_payment(
+        plan.price,
+        plan.name,
+        `Подписка: ${plan.name}`,
+        `${window.location.origin}/payment-result`,
+        1
+      );
+      if (data.value) {
+        window.location.href = data.value.redirectUrl;
+      }
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
 
-  const handlePay = (planId: string) => {
-    const plan = plans.find(p => p.id === planId);
-    setSelectedPlan(null);
-    setSuccessMessage(`Подписка «${plan?.name}» успешно оплачена!`);
-    setTimeout(() => setSuccessMessage(null), 3000);
-  };
 
   return (
     <div className="subscriptions-page">
@@ -150,14 +159,6 @@ const Subscriptions: React.FC = () => {
       <footer className="subscriptions-footer">
         <p>© 2024 SMT - Tax Management System. All rights reserved.</p>
       </footer>
-
-      {selectedPlan && (
-        <PaymentModal
-          plan={selectedPlan}
-          onClose={() => setSelectedPlan(null)}
-          onPay={handlePay}
-        />
-      )}
     </div>
   );
 };

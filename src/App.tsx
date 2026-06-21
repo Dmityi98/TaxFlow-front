@@ -6,6 +6,8 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Dashboard from './pages/Dashboard';
 import Subscriptions from './pages/Subscriptions';
+import ArticlesList from './pages/ArticlesList';
+import ArticlePage from './pages/ArticlePage';
 import './styles/global.css';
 import Main from './components/Main/Main';
 
@@ -18,6 +20,8 @@ const App: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/main" element={ <Main/>} />
+          <Route path="/articles" element={<ArticlesList />} />
+          <Route path="/articles/:id" element={<ArticlePage />} />
           {/* Protected routes */}
           <Route
             path="/dashboard"
@@ -29,10 +33,12 @@ const App: React.FC = () => {
           />
           <Route
             path="/subscriptions"
+            
             element={
               <ProtectedRoute>
-                <Subscriptions />
+                 <Subscriptions />
               </ProtectedRoute>
+               
             }
           />
           

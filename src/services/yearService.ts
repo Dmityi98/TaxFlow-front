@@ -7,9 +7,9 @@ export const yearService = {
     return response.data;
   },
 
-  async createYear(nameTable: string): Promise<YearDTO> {
+  async createYear(nameTable: string): Promise<YearDTO | null> {
     const response = await api.post<YearDTO>('/years', { nameTable });
-    return response.data;
+    return response.data ?? null;
   },
 
   async updateYear(yearId: string, nameTable: string, yearDto: YearDTO): Promise<boolean> {
@@ -35,4 +35,15 @@ export const yearService = {
       return [];
     }
   },
+
+  async deleteYear(yearId: string){
+    try{
+      const responce = await api.delete(`/years/${yearId}`)
+      const data = responce.data
+      return data
+    }catch (err){
+      console.error("delete error");
+      return err
+    }
+  }
 };

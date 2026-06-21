@@ -44,7 +44,11 @@ const TaxTableList: React.FC = () => {
     try {
       if (useBackend) {
         const created = await yearService.createYear(newYearName);
-        setYears([...years, created]);
+        if (created) {
+          setYears([...years, created]);
+        } else {
+          alert('Вы достигли лимита таблиц для вашего тарифного плана');
+        }
       }
       
       setNewYearName('');
@@ -58,12 +62,11 @@ const TaxTableList: React.FC = () => {
   };
 
   const handleDeleteYear = async (yearId: string) => {
-    if (!confirm('Are you sure you want to delete this year?')) return;
+    if (!confirm('Are you sure you want to delete this year?' + yearId)) return;
 
-    setYears(years.filter((y) => y.id !== yearId));
-    if (selectedYear?.id === yearId) {
-      setSelectedYear(null);
-    }
+    await yearService.deleteYear(yearId)
+    await loadYears()
+
   };
 
   const handleCellChange = (
